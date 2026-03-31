@@ -1,0 +1,455 @@
+--------- Execute this also with each query before execute below query
+mgmt=graph.openManagement()
+ 
+for(i=0;i<mgmt.getOpenInstances().size();i++) {if (!mgmt.getOpenInstances().getAt(i).contains('current')) {mgmt.forceCloseInstance(mgmt.getOpenInstances().getAt(i))}};mgmt.commit();
+ 
+size = graph.getOpenTransactions().size();
+
+for(i=0;i<size;i++) {graph.getOpenTransactions().getAt(0).rollback()}
+
+-------------------------------------------- Firstly call ONE query THEN CALL REGISTER FOR one SPECIFIC query ONE BY ONE -------
+mgmt=graph.openManagement()
+ManagementSystem.awaitGraphIndexStatus(graph, 'byEdgeSrcInterface').call()
+mgmt.commit()
+
+mgmt=graph.openManagement()
+ManagementSystem.awaitGraphIndexStatus(graph, 'byEdgeDestInterface').call()
+mgmt.commit()
+
+mgmt=graph.openManagement()
+ManagementSystem.awaitGraphIndexStatus(graph, 'byEdgeNeName').call()
+mgmt.commit()
+
+mgmt=graph.openManagement()
+ManagementSystem.awaitGraphIndexStatus(graph, 'byEdgeNeType').call()
+mgmt.commit()
+
+mgmt=graph.openManagement()
+ManagementSystem.awaitGraphIndexStatus(graph, 'byEdgeRelation').call()
+mgmt.commit()
+
+------------------------------------------- Then CALL REGISTER QUERY AFTER CALL SPECIFIC ABOVE QURY ONE BY ONE ------
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byEdgeSrcInterface'), SchemaAction.REGISTER_INDEX)
+mgmt.commit()
+
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byEdgeSrcInterface'), SchemaAction.REGISTER_INDEX)
+mgmt.commit()
+
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byEdgeDestInterface'), SchemaAction.REGISTER_INDEX)
+mgmt.commit()
+
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byDestInterface'), SchemaAction.REGISTER_INDEX)
+mgmt.commit()
+
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byEdgeNeName'), SchemaAction.REGISTER_INDEX)
+mgmt.commit()
+
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byNeName'), SchemaAction.REGISTER_INDEX)
+mgmt.commit()
+
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byEdgeNeType'), SchemaAction.REGISTER_INDEX)
+mgmt.commit()	
+
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byNeType'), SchemaAction.REGISTER_INDEX)
+mgmt.commit()
+
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byEdgeRelation'), SchemaAction.REGISTER_INDEX)
+mgmt.commit()
+
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byRelation'), SchemaAction.REGISTER_INDEX)
+mgmt.commit()
+
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byLatitude'), SchemaAction.REGISTER_INDEX)
+mgmt.commit()
+
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byLongitude'), SchemaAction.REGISTER_INDEX)
+mgmt.commit()
+
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byNeCategory'), SchemaAction.REGISTER_INDEX)
+mgmt.commit()
+
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byEdgeSrcCategory'), SchemaAction.REGISTER_INDEX)
+mgmt.commit()
+
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byEdgeSrcCategory'), SchemaAction.REGISTER_INDEX)
+mgmt.commit()
+
+---------------------------------------------------- THEN CALL ENABLED QUERY --------------
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byEdgeSrcInterface'), SchemaAction.ENABLE_INDEX)
+mgmt.commit()
+
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byEdgeDestInterface'), SchemaAction.ENABLE_INDEX)
+mgmt.commit()
+
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byNeType'), SchemaAction.ENABLE_INDEX)
+mgmt.commit()
+
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byEdgeSrcCategory'), SchemaAction.ENABLE_INDEX)
+mgmt.commit()
+
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex('byEdgeDestCategory '), SchemaAction.ENABLE_INDEX)
+mgmt.commit()
+
+--------REINDESX------
+mgmt=graph.openManagement()
+mgmt.updateIndex(mgmt.getGraphIndex("byNeType"), SchemaAction.REINDEX).get()
+mgmt.commit()
+---------------------
+gremlin> mgmt.printIndexes()
+==>------------------------------------------------------------------------------------------------
+Graph Index (Vertex)           | Type        | Unique    | Backing        | Key:           Status |
+---------------------------------------------------------------------------------------------------
+byVertexLastDiscoveryTime      | Composite   | false     | internalindex  | lastDiscoveryTime:    ENABLED |
+byVertexParentNE               | Composite   | false     | internalindex  | parentNE:     ENABLED |
+byVertexPopId                  | Composite   | false     | internalindex  | popId:        ENABLED |
+byVertexPopName                | Composite   | false     | internalindex  | popName:      ENABLED |
+byVertexRelation               | Composite   | false     | internalindex  | relation:     ENABLED |
+byVertexNeName                 | Composite   | false     | internalindex  | neName:       ENABLED |
+byVertexNeType                 | Composite   | false     | internalindex  | neType:       ENABLED |
+byVertexNeCategory             | Composite   | false     | internalindex  | neCategory:    ENABLED |
+byVertexLastDiscoveryDateTime  | Composite   | false     | internalindex  | lastDiscoveryDateTime:    ENABLED |
+---------------------------------------------------------------------------------------------------
+Graph Index (Edge)             | Type        | Unique    | Backing        | Key:           Status |
+---------------------------------------------------------------------------------------------------
+byEdgeSrcInterface             | Composite   | false     | internalindex  | srcInterface:    ENABLED |
+byEdgeDestInterface            | Composite   | false     | internalindex  | destInterface:    ENABLED |
+byEdgeRelation                 | Composite   | false     | internalindex  | relation:     ENABLED |
+byEdgeSrcType                  | Composite   | false     | internalindex  | srcType:      ENABLED |
+byEdgeDestType                 | Composite   | false     | internalindex  | destType:     ENABLED |
+byEdgeSrcCategory              | Composite   | false     | internalindex  | srcCategory:    ENABLED |
+byEdgeDestCategory             | Composite   | false     | internalindex  | destCategory:    ENABLED |
+byEdgeTag                      | Composite   | false     | internalindex  | tag:          ENABLED |
+byEdgeAreaIpAddress            | Composite   | false     | internalindex  | areaIpAddress:    ENABLED |
+byEdgeLastDiscoveryTime        | Composite   | false     | internalindex  | lastDiscoveryTime:    ENABLED |
+byEdgeLastDiscoveryDateTime    | Composite   | false     | internalindex  | lastDiscoveryDateTime:    ENABLED |
+---------------------------------------------------------------------------------------------------
+Relation Index (VCI)           | Type        | Direction | Sort Key       | Order    |     Status |
+---------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+-------------------------------------------- CREATE INDEXES ON PROD ------------------------------
+-------FOR EDGES ----------
+1.
+
+mgmt = graph.openManagement()
+esrc = mgmt.getPropertyKey('srcInterface') ?: mgmt.makePropertyKey('srcInterface').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+
+if (!mgmt.getGraphIndex('byEdgeSrcInterface')) { mgmt.buildIndex('byEdgeSrcInterface', Edge.class) .addKey(esrc) .buildCompositeIndex() }
+mgmt.commit()
+
+2.
+
+mgmt = graph.openManagement()
+edest = mgmt.getPropertyKey('destInterface') ?: mgmt.makePropertyKey('destInterface') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byEdgeDestInterface')) { mgmt.buildIndex('byEdgeDestInterface', Edge.class) .addKey(edest) .buildCompositeIndex() }
+mgmt.commit()
+
+
+3.
+
+mgmt = graph.openManagement()
+erel = mgmt.getPropertyKey('relation') ?: mgmt.makePropertyKey('relation') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byEdgeRelation')) { mgmt.buildIndex('byEdgeRelation', Edge.class) .addKey(erel) .buildCompositeIndex() }
+mgmt.commit()
+
+4.
+
+mgmt = graph.openManagement() 
+esrccat = mgmt.getPropertyKey('srcCategory') ?: mgmt.makePropertyKey('srcCategory').dataType(String.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+
+if (!mgmt.getGraphIndex('byEdgeSrcCategory')) { mgmt.buildIndex('byEdgeSrcCategory', Edge.class) .addKey(esrccat) .buildCompositeIndex() }
+mgmt.commit()
+
+
+5.
+
+mgmt = graph.openManagement()
+edestcat = mgmt.getPropertyKey('destCategory') ?: mgmt.makePropertyKey('destCategory') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byEdgeDestCategory')) { mgmt.buildIndex('byEdgeDestCategory', Edge.class) .addKey(edestcat) .buildCompositeIndex() }
+mgmt.commit()
+
+6.
+
+mgmt = graph.openManagement()
+esrctype = mgmt.getPropertyKey('srcType') ?: mgmt.makePropertyKey('srcType') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byEdgeSrcType')) { mgmt.buildIndex('byEdgeSrcType', Edge.class) .addKey(esrctype) .buildCompositeIndex() }
+mgmt.commit()
+
+7.
+
+mgmt = graph.openManagement()
+edesttype = mgmt.getPropertyKey('destType') ?: mgmt.makePropertyKey('destType') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byEdgeDestType')) { mgmt.buildIndex('byEdgeDestType', Edge.class) .addKey(edesttype) .buildCompositeIndex() }
+mgmt.commit()
+
+8.
+mgmt = graph.openManagement()
+etag = mgmt.getPropertyKey('tag') ?: mgmt.makePropertyKey('tag') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byEdgeTag')) { mgmt.buildIndex('byEdgeTag', Edge.class) .addKey(etag) .buildCompositeIndex() }
+mgmt.commit()
+
+
+9.
+mgmt = graph.openManagement()
+eareaip = mgmt.getPropertyKey('areaIpAddress') ?: mgmt.makePropertyKey('areaIpAddress') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byEdgeAreaIpAddress')) { mgmt.buildIndex('byEdgeAreaIpAddress', Edge.class) .addKey(eareaip) .buildCompositeIndex() }
+mgmt.commit()
+
+
+10.
+mgmt = graph.openManagement()
+elastdiscovery = mgmt.getPropertyKey('lastDiscoveryDateTime') ?: mgmt.makePropertyKey('lastDiscoveryDateTime') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byEdgeLastDiscoveryDateTime')) { mgmt.buildIndex('byEdgeLastDiscoveryDateTime', Edge.class) .addKey(elastdiscovery) .buildCompositeIndex() }
+mgmt.commit()
+
+11.
+mgmt = graph.openManagement()
+edel = mgmt.getPropertyKey('isDeleted') ?: mgmt.makePropertyKey('isDeleted').dataType(Boolean.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+
+if (!mgmt.getGraphIndex('byEdgeDeleted')) { mgmt.buildIndex('byEdgeDeleted', Edge.class) .addKey(edel) .buildCompositeIndex() }
+mgmt.commit()
+
+12.
+mgmt = graph.openManagement()
+elsp = mgmt.getPropertyKey('lspName') ?: mgmt.makePropertyKey('lspName').dataType(Boolean.class).cardinality(org.janusgraph.core.Cardinality.SINGLE).make()
+
+if (!mgmt.getGraphIndex('byEdgeLspName')) { mgmt.buildIndex('byEdgeLspName', Edge.class) .addKey(elsp) .buildCompositeIndex() }
+mgmt.commit()
+
+-------------------------------------------- CREATE INDEXES ON PROD ------------------------------
+-------FOR VERTEX ----------
+1.
+
+mgmt = graph.openManagement()
+vnename = mgmt.getPropertyKey('neName') ?: mgmt.makePropertyKey('neName') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byVertexNeName')) { mgmt.buildIndex('byVertexNeName', Vertex.class) .addKey(vnename) .buildCompositeIndex() }
+mgmt.commit()
+
+
+2.
+
+mgmt = graph.openManagement()
+vnetype = mgmt.getPropertyKey('neType') ?: mgmt.makePropertyKey('neType') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byVertexNeType')) { mgmt.buildIndex('byVertexNeType', Vertex.class) .addKey(vnetype) .buildCompositeIndex() }
+mgmt.commit() 
+
+
+3.
+
+mgmt = graph.openManagement()
+vcat = mgmt.getPropertyKey('neCategory') ?: mgmt.makePropertyKey('neCategory') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byVertexNeCategory')) { mgmt.buildIndex('byVertexNeCategory', Vertex.class) .addKey(vcat) .buildCompositeIndex() }
+mgmt.commit()
+
+
+4.
+
+mgmt = graph.openManagement()
+vpopname = mgmt.getPropertyKey('popName') ?: mgmt.makePropertyKey('popName') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byVertexPopName')) { mgmt.buildIndex('byVertexPopName', Vertex.class) .addKey(vpopname) .buildCompositeIndex() }
+mgmt.commit()
+
+
+5.
+
+mgmt = graph.openManagement()
+vpopid = mgmt.getPropertyKey('popId') ?: mgmt.makePropertyKey('popId') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byVertexPopId')) { mgmt.buildIndex('byVertexPopId', Vertex.class) .addKey(vpopid) .buildCompositeIndex() }
+mgmt.commit()
+
+5.1
+mgmt = graph.openManagement()
+vpopcode = mgmt.getPropertyKey('popCode') ?: mgmt.makePropertyKey('popCode') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byVertexPopCode')) { mgmt.buildIndex('byVertexPopCode', Vertex.class) .addKey(vpopcode) .buildCompositeIndex() }
+mgmt.commit()
+
+5.2
+mgmt = graph.openManagement()
+vip = mgmt.getPropertyKey('ipv4') ?: mgmt.makePropertyKey('ipv4') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byVertexIp')) { mgmt.buildIndex('byVertexIp', Vertex.class) .addKey(vip) .buildCompositeIndex() }
+mgmt.commit()
+
+6.
+
+mgmt = graph.openManagement()
+vparentne = mgmt.getPropertyKey('parentNE') ?: mgmt.makePropertyKey('parentNE') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byVertexParentNE')) { mgmt.buildIndex('byVertexParentNE', Vertex.class) .addKey(vparentne) .buildCompositeIndex() }
+mgmt.commit()
+
+
+7.
+
+mgmt = graph.openManagement()
+vrelation = mgmt.getPropertyKey('relation') ?: mgmt.makePropertyKey('relation') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byVertexRelation')) { mgmt.buildIndex('byVertexRelation', Vertex.class) .addKey(vrelation) .buildCompositeIndex() }
+mgmt.commit()
+
+
+8.
+
+mgmt = graph.openManagement()
+vlastdiscovery = mgmt.getPropertyKey('lastDiscoveryDateTime') ?: mgmt.makePropertyKey('lastDiscoveryDateTime') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byVertexLastDiscoveryDateTime')) { mgmt.buildIndex('byVertexLastDiscoveryDateTime', Vertex.class) .addKey(vlastdiscovery) .buildCompositeIndex() }
+mgmt.commit()
+
+9.
+mgmt = graph.openManagement()
+vdel = mgmt.getPropertyKey('isDeleted') ?: mgmt.makePropertyKey('isDeleted') .dataType(Boolean.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byVertexDeleted')) { mgmt.buildIndex('byVertexDeleted', Vertex.class) .addKey(vdel) .buildCompositeIndex() }
+mgmt.commit()
+
+
+mgmt = graph.openManagement()
+vsource = mgmt.getPropertyKey('source') ?: mgmt.makePropertyKey('source') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byVertexSource')) { mgmt.buildIndex('byVertexSource', Vertex.class) .addKey(vsource) .buildCompositeIndex() }
+mgmt.commit()
+
+gremlin> mgmt.printIndexes()
+==>------------------------------------------------------------------------------------------------
+Graph Index (Vertex)           | Type        | Unique    | Backing        | Key:           Status |
+---------------------------------------------------------------------------------------------------
+byVertexLastDiscoveryTime      | Composite   | false     | internalindex  | lastDiscoveryTime:    ENABLED |
+byVertexParentNE               | Composite   | false     | internalindex  | parentNE:     ENABLED |
+byVertexPopId                  | Composite   | false     | internalindex  | popId:        ENABLED |
+byVertexPopName                | Composite   | false     | internalindex  | popName:      ENABLED |
+byVertexRelation               | Composite   | false     | internalindex  | relation:     ENABLED |
+byVertexNeName                 | Composite   | false     | internalindex  | neName:       ENABLED |
+byVertexNeType                 | Composite   | false     | internalindex  | neType:       ENABLED |
+byVertexNeCategory             | Composite   | false     | internalindex  | neCategory:    ENABLED |
+byVertexLastDiscoveryDateTime  | Composite   | false     | internalindex  | lastDiscoveryDateTime:    ENABLED |
+---------------------------------------------------------------------------------------------------
+Graph Index (Edge)             | Type        | Unique    | Backing        | Key:           Status |
+---------------------------------------------------------------------------------------------------
+byEdgeSrcInterface             | Composite   | false     | internalindex  | srcInterface:    ENABLED |
+byEdgeDestInterface            | Composite   | false     | internalindex  | destInterface:    ENABLED |
+byEdgeRelation                 | Composite   | false     | internalindex  | relation:     ENABLED |
+byEdgeSrcType                  | Composite   | false     | internalindex  | srcType:      ENABLED |
+byEdgeDestType                 | Composite   | false     | internalindex  | destType:     ENABLED |
+byEdgeSrcCategory              | Composite   | false     | internalindex  | srcCategory:    ENABLED |
+byEdgeDestCategory             | Composite   | false     | internalindex  | destCategory:    ENABLED |
+byEdgeTag                      | Composite   | false     | internalindex  | tag:          ENABLED |
+byEdgeAreaIpAddress            | Composite   | false     | internalindex  | areaIpAddress:    ENABLED |
+byEdgeLastDiscoveryTime        | Composite   | false     | internalindex  | lastDiscoveryTime:    ENABLED |
+byEdgeLastDiscoveryDateTime    | Composite   | false     | internalindex  | lastDiscoveryDateTime:    ENABLED |
+---------------------------------------------------------------------------------------------------
+Relation Index (VCI)           | Type        | Direction | Sort Key       | Order    |     Status |
+---------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+g.addV('device').property('neName','NE_1').property('relation','LLDP').property('srcInterface','Gig1/0').property('destInterface','Gig1/1').property('latitude','27.8766').property('longitude','76.8766').property('neCategory','TEST')
+g.tx().commit()
+g.addV('device').property('neName','NE_2').property('relation','LLDP').property('srcInterface','Gig1/1').property('destInterface','Gig1/2').property('latitude','28.8766').property('longitude','75.8766').property('neCategory','TEST')
+g.tx().commit()
+g.addV('device').property('neName','NE_3').property('relation','LLDP').property('srcInterface','Gig1/2').property('destInterface','Gig1/3').property('latitude','29.8766').property('longitude','72.8766').property('neCategory','TEST')
+g.tx().commit()
+g.addV('device').property('neName','NE_4').property('relation','LLDP').property('srcInterface','Gig1/3').property('destInterface','Gig1/4').property('latitude','21.8766').property('longitude','77.8766').property('neCategory','TEST')
+g.tx().commit()
+g.addV('device').property('neName','NE_5').property('relation','LLDP').property('srcInterface','Gig1/4').property('destInterface','Gig1/5').property('latitude','22.8766').property('longitude','79.8766').property('neCategory','TEST')
+g.tx().commit()
+g.addV('device').property('neName','NE_6').property('relation','LLDP').property('srcInterface','Gig1/5').property('destInterface','Gig1/6').property('latitude','23.8766').property('longitude','71.8766').property('neCategory','TEST')
+g.tx().commit()
+g.addV('device').property('neName','NE_7').property('relation','LLDP').property('srcInterface','Gig1/6').property('destInterface','Gig1/7').property('latitude','24.8766').property('longitude','73.8766').property('neCategory','TEST')
+g.tx().commit()
+g.addV('device').property('neName','NE_8').property('relation','LLDP').property('srcInterface','Gig1/7').property('destInterface','Gig1/8').property('latitude','25.8766').property('longitude','74.8766').property('neCategory','TEST')
+g.tx().commit()
+g.addV('device').property('neName','NE_9').property('relation','LLDP').property('srcInterface','Gig1/8').property('destInterface','Gig1/9').property('latitude','26.8766').property('longitude','78.8766').property('neCategory','TEST')
+g.tx().commit()
+g.addV('device').property('neName','NE_10').property('relation','LLDP').property('srcInterface','Gig1/9').property('destInterface','Gig1/10').property('latitude','29.8766').property('longitude','80.8766').property('neCategory','TEST')
+g.tx().commit()
+
+
+g.V().has('neName','NE_1').as('a').V().has('neName','NE_2').addE('LLDP').from('a').property('srcInterface','Gig1/0').property('destInterface','Gig1/1').property('srcCategory','ROUTER').property('destCategory','ROUTER').property('relation','LLDP').next()
+g.tx().commit()
+g.V().has('neName','NE_2').as('a').V().has('neName','NE_3').addE('LLDP').from('a').property('srcInterface','Gig1/1').property('destInterface','Gig1/2').property('srcCategory','ROUTER').property('destCategory','ROUTER').next()
+g.tx().commit()
+
+g.V().has('relation','LLDP').has('neName','NE_1').elementMap()
+g.V().has('srcInterface','Gig1/0').has('destInterface','Gig1/2').elementMap()
+g.V().has('destInterface','Gig1/2').elementMap()
+
+g.V().has('neCategory','TEST').elementMap()
+g.V().has('latitude','27.8766').elementMap()
+
+g.V().has('relation','LLDP').has('neName','NE_1').elementMap()
+g.E().has('srcCategory','ROUTER').elementMap()
+
+g.E().has('srcInterface','Gig1/0').elementMap()
+g.E().has('destInterface','Gig1/2').elementMap()
+
+g.E().has('relation','LLDP').elementMap()
+
+kubectl logs -f topology-service-867c4bb4db-7qnbd -n ansible --tail=1
+

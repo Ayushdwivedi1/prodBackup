@@ -1,0 +1,2752 @@
+{
+  "openapi": "3.1.0",
+  "info": {
+    "title": "topology-api",
+    "version": "3.1.0"
+  },
+  "servers": [
+    {
+      "url": "http://localhost:9016/topology",
+      "description": "Generated server url"
+    }
+  ],
+  "paths": {
+    "/graphdb/getTopologyDataCount": {
+      "post": {
+        "tags": [
+          "JanusgraphRest"
+        ],
+        "summary": "Retrieves count of vertices or edges based on operation mode with filters",
+        "operationId": "getTopologyDataCount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success|OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Someting went wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": [
+              "TOPOLOGY_GRAPHDB_READ_GET_TOPOLOGY_DATA_COUNT"
+            ]
+          }
+        ]
+      }
+    },
+    "/lsp/getLspStatus": {
+      "post": {
+        "tags": [
+          "TopologyLspRest"
+        ],
+        "summary": "Returns total/down/active LSP count for router",
+        "operationId": "getLspStatus",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success|OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Someting went wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": [
+              "TOPOLOGY_LSP_READ_TOPOLOGY_LSP_STATUS"
+            ]
+          }
+        ]
+      }
+    },
+    "/lsp/getLspFilterData": {
+      "post": {
+        "tags": [
+          "TopologyLspRest"
+        ],
+        "summary": "Returns LSP links and nodes filtered by NE names",
+        "operationId": "getLspFilterData",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "default": "OUT"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success|OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Someting went wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": [
+              "TOPOLOGY_LSP_READ_LSP_FILTER_DATA"
+            ]
+          }
+        ]
+      }
+    },
+    "/lsp/getLspSearch": {
+      "get": {
+        "tags": [
+          "TopologyLspRest"
+        ],
+        "summary": "Performs region-wise LSP search",
+        "operationId": "getLspSearch",
+        "parameters": [
+          {
+            "name": "region",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success|OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Someting went wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": [
+              "TOPOLOGY_LSP_READ_SEARCH_LSP_DATA"
+            ]
+          }
+        ]
+      }
+    },
+    "/lsp/getLspDataCount": {
+      "get": {
+        "tags": [
+          "TopologyLspRest"
+        ],
+        "summary": "Returns count of LSP links (same params as getLspData), plain text",
+        "operationId": "getLspDataCount",
+        "parameters": [
+          {
+            "name": "timestamp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lspName",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success|OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Someting went wrong",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": [
+              "TOPOLOGY_LSP_READ_TOPOLOGY_LSP_COUNT"
+            ]
+          }
+        ]
+      }
+    },
+    "/lsp/getLspData": {
+      "get": {
+        "tags": [
+          "TopologyLspRest"
+        ],
+        "summary": "Returns LSP links only (with optional search and pagination)",
+        "operationId": "getLspData",
+        "parameters": [
+          {
+            "name": "timestamp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lspName",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "lLimit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "uLimit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success|OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Someting went wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": [
+              "TOPOLOGY_LSP_READ_TOPOLOGY_LSP"
+            ]
+          }
+        ]
+      }
+    },
+    "/lsp/getTopologyLspData": {
+      "get": {
+        "tags": [
+          "TopologyLspRest"
+        ],
+        "summary": "Retrieves MPLS LSP link data from PM Cassandra",
+        "operationId": "getTopologyLspData",
+        "parameters": [
+          {
+            "name": "filter",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "timestamp",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success|OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Someting went wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": [
+              "TOPOLOGY_LSP_READ_TOPOLOGY_LSP_DATA"
+            ]
+          }
+        ]
+      }
+    },
+     "/graphdb/getFilterLspData": {
+      "get": {
+        "tags": [
+          "JanusgraphRest"
+        ],
+        "summary": "Retrieves links and nodes filtered by LSP name",
+        "operationId": "getFilterLspData",
+        "parameters": [
+          {
+            "name": "lspName",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "Success|OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Someting went wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": [
+              "TOPOLOGY_GRAPHDB_READ_FILTER_LSP_DATA"
+            ]
+          }
+        ]
+      }
+    },
+     "/graphdb/getTopologyDetail": {
+      "post": {
+        "tags": [
+          "JanusgraphRest"
+        ],
+        "summary": "Retrieves topology detail data (vertices and/or edges) based on operation mode and filters with pagination support",
+        "operationId": "getTopologyDetail",
+        "parameters": [
+          {
+            "name": "lLimit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 0
+            }
+          },
+          {
+            "name": "uLimit",
+            "in": "query",
+            "required": false,
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 25
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success|OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Someting went wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": [
+              "TOPOLOGY_GRAPHDB_READ_GET_TOPOLOGY_DETAIL"
+            ]
+          }
+        ]
+      }
+    },
+    "/graphdb/getTopologyDetailCount": {
+      "post": {
+        "tags": [
+          "JanusgraphRest"
+        ],
+        "summary": "Retrieves count of topology detail data based on operation mode and filters",
+        "operationId": "getTopologyDetailCount",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "object"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success|OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Someting went wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "integer",
+                  "format": "int64"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": [
+              "TOPOLOGY_GRAPHDB_READ_GET_TOPOLOGY_DETAIL_COUNT"
+            ]
+          }
+        ]
+      }
+    },
+    "/graphdb/getFilterData": {
+      "post": {
+        "tags": [
+          "JanusgraphRest"
+        ],
+        "summary": "Searches for edges based on flexible start and end property matching",
+        "operationId": "getFilterData",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success|OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Someting went wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": [
+              "TOPOLOGY_GRAPHDB_READ_FILTER_DATA"
+            ]
+          }
+        ]
+      }
+    },
+    "/TopologyIntegration/getTopologyData": {
+      "post": {
+        "tags": [
+          "TopologyIntegrationRest"
+        ],
+        "summary": "Get Topology Data",
+        "operationId": "getTopologyData",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TopologyRequestWrapper"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success|OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Topology"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Topology"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Topology"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Topology"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Someting went wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Topology"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": [
+              "TOPOLOGY_TOPOLOGY_INTEGRATION_READ_GET_TOPOLOGY_DATA"
+            ]
+          }
+        ]
+      }
+    },
+    "/graphdb/maxModificationTime": {
+      "get": {
+        "tags": [
+          "JanusgraphRest"
+        ],
+        "summary": "Returns the maximum modification timestamp across vertices and edges",
+        "operationId": "getMaxModificationTime",
+        "responses": {
+          "200": {
+            "description": "Success|OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Someting went wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": [
+              "TOPOLOGY_GRAPHDB_READ_MAX_TIME"
+            ]
+          }
+        ]
+      }
+    },
+    "/graphdb/getAlarmBasedNodes": {
+      "post": {
+        "tags": [
+          "JanusgraphRest"
+        ],
+        "summary": "Get graph nodes based on FM alarms",
+        "operationId": "getAlarmBasedNodes",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlarmMonitoringRequestFilterWrapper"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "Success|OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Someting went wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": [
+              "TOPOLOGY_GRAPHDB_READ_ALARM_DATA"
+            ]
+          }
+        ]
+      }
+    },
+    "/graphdb/searchByNeTypeAndNeName": {
+      "get": {
+        "tags": [
+          "JanusgraphRest"
+        ],
+        "summary": "Searches for network elements based on network element type and name",
+        "operationId": "searchByNeTypeAndNeName",
+        "parameters": [
+          {
+            "name": "neTypes",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "neName",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success|OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Not authorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Someting went wrong",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "object"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "default": [
+              "TOPOLOGY_GRAPHDB_READ_BASIS_OF_NENAME"
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Filter": {
+        "type": "object",
+        "format": "Filter",
+        "description": "A Filter Wrapper",
+        "properties": {
+          "tableName": {
+            "type": "string",
+            "description": "tableName of FilterWrapper"
+          },
+          "filterParameter": {
+            "type": "array",
+            "description": "filter of FilterWrapper",
+            "items": {
+              "$ref": "#/components/schemas/FilterParameter"
+            }
+          }
+        }
+      },
+      "FilterParameter": {
+        "type": "object",
+        "format": "FilterParameter",
+        "description": "A FilterParameter Wrapper",
+        "properties": {
+          "labelType": {
+            "type": "string",
+            "description": "labelType of FilterParameter"
+          },
+          "operation": {
+            "type": "string",
+            "description": "operation of FilterParameter"
+          },
+          "value": {
+            "type": "object",
+            "description": "value of FilterParameter"
+          },
+          "datatype": {
+            "type": "string",
+            "description": "datatype of FilterParameter"
+          }
+        }
+      },
+      "AlarmMonitoringRequestFilterWrapper": {
+        "type": "object",
+        "properties": {
+          "neList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "neIdList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "assignIncident": {
+            "type": "boolean"
+          },
+          "alarmCodes": {
+            "type": "array",
+            "description": "This represents the alarmCodes.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "alarmNames": {
+            "type": "array",
+            "description": "This represents the alarmNames.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "cktId": {
+            "type": "array",
+            "description": "This represents the alarm links.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "domain": {
+            "type": "array",
+            "description": "This represents the Domain.",
+            "example": "['RAN']",
+            "items": {
+              "type": "string"
+            }
+          },
+          "vendor": {
+            "type": "array",
+            "description": "This represents the Vendor.",
+            "example": "['SAMSUNG']",
+            "items": {
+              "type": "string"
+            }
+          },
+          "extraFilter": {
+            "type": "string",
+            "description": "This represents the filter in RSQL form.",
+            "example": "et=notnull='' and et=bt=('1601543231033','1601543242493') and cat=in=('OUTAGE','DETERIORATION') and se!='cleared' and acs=='critical' and pc=eqic='hardware*' and pwo='CR-GEN-061020-1601972090840' or insid=isnull=''",
+            "minLength": 1
+          },
+          "tableName": {
+            "type": "string",
+            "description": "This represents table name."
+          },
+          "startTime": {
+            "type": "integer",
+            "format": "int64",
+            "description": "This represents startTime."
+          },
+          "dateEnd": {
+            "type": "integer",
+            "format": "int64",
+            "description": "This represents dateEnd."
+          },
+          "severity": {
+            "type": "array",
+            "description": "This represents the severity of the alarm.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "classification": {
+            "type": "array",
+            "description": "This represents the classification of the alarm.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "geographyL1Name": {
+            "type": "array",
+            "description": "This represents the level 1 geography name.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "geographyL2Name": {
+            "type": "array",
+            "description": "This represents the level 2 geography name.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "geographyL3Name": {
+            "type": "array",
+            "description": "This represents the level 3 geography name.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "geographyL4Name": {
+            "type": "array",
+            "description": "This represents the level 4 geography name.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "alarmcode": {
+            "type": "string",
+            "description": "This represents the alarm code."
+          },
+          "alarmStatus": {
+            "type": "array",
+            "description": "This represents the alarmStatus.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "alarmname": {
+            "type": "string",
+            "description": "This represents the alarm name."
+          },
+          "eventType": {
+            "type": "string",
+            "description": "This represents the event type."
+          },
+          "incidentId": {
+            "type": "string",
+            "description": "This represents the incident ID."
+          },
+          "description": {
+            "type": "string",
+            "description": "This represents the description of the alarm."
+          },
+          "serviceAffected": {
+            "type": "boolean",
+            "description": "This represents the service affected by the alarm."
+          },
+          "senderName": {
+            "type": "array",
+            "description": "This represents the name of the sender.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "entityType": {
+            "type": "array",
+            "description": "This represents the entity type of the alarm.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "subEntity": {
+            "type": "string",
+            "description": "This represents the sub-entity related to the alarm."
+          },
+          "subEntityIn": {
+            "type": "array",
+            "description": "This represents the sub-entity related to the alarm.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "entityNames": {
+            "type": "array",
+            "description": "This represents the entityNames of the alarm.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "entityServiceType": {
+            "type": "array",
+            "description": "This represents the entity service type.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "alarmExternalId": {
+            "type": "string",
+            "description": "This represents the external ID of the alarm."
+          },
+          "entityName": {
+            "type": "string",
+            "description": "This represents the name of the entity."
+          },
+          "entityId": {
+            "type": "string",
+            "description": "This represents the ID of the entity."
+          },
+          "nokiaAlarmMeta": {
+            "type": "string",
+            "description": "This represents the Nokia alarm metadata."
+          },
+          "technology": {
+            "type": "array",
+            "description": "This represents the technology related to the alarm.",
+            "items": {
+              "type": "string"
+            }
+          },
+          "probableCause": {
+            "type": "string",
+            "description": "This represents the probable cause of the alarm."
+          },
+          "nelId": {
+            "type": "string",
+            "description": "This represents the location id."
+          },
+          "alarmGroup": {
+            "type": "string",
+            "description": "This represents the alarmGroup."
+          },
+          "occurance": {
+            "type": "integer",
+            "format": "int32",
+            "description": "This represents the occurance."
+          },
+          "correlationType": {
+            "type": "string",
+            "description": "This represents the correlation Type."
+          },
+          "acknowledged": {
+            "type": "string",
+            "description": "This represents the acknowledged Type."
+          },
+          "operator": {
+            "type": "string",
+            "description": "This represents operator used for aging comparison"
+          },
+          "aging": {
+            "type": "integer",
+            "format": "int64",
+            "description": "This represents aging"
+          }
+        }
+      },
+      "NetworkElementWrapper": {
+        "type": "object",
+        "properties": {
+          "neName": {
+            "type": "string"
+          },
+          "createdTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "modifiedTime": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "latitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "longitude": {
+            "type": "number",
+            "format": "double"
+          },
+          "neSource": {
+            "type": "string"
+          },
+          "neType": {
+            "type": "string"
+          },
+          "vendor": {
+            "type": "string"
+          },
+          "neFrequency": {
+            "type": "string"
+          },
+          "isDeleted": {
+            "type": "boolean"
+          },
+          "neStatus": {
+            "type": "string"
+          },
+          "technology": {
+            "type": "string"
+          },
+          "domain": {
+            "type": "string"
+          },
+          "softwareVersion": {
+            "type": "string"
+          },
+          "mnc": {
+            "type": "string"
+          },
+          "mcc": {
+            "type": "string"
+          },
+          "neId": {
+            "type": "string"
+          },
+          "pmEmsId": {
+            "type": "string"
+          },
+          "fmEmsId": {
+            "type": "string"
+          },
+          "cmEmsId": {
+            "type": "string"
+          },
+          "ipv4": {
+            "type": "string"
+          },
+          "ipv6": {
+            "type": "string"
+          },
+          "model": {
+            "type": "string"
+          },
+          "macAddress": {
+            "type": "string"
+          },
+          "friendlyName": {
+            "type": "string"
+          },
+          "duplex": {
+            "type": "string"
+          },
+          "radius": {
+            "type": "number",
+            "format": "double"
+          },
+          "category": {
+            "type": "string"
+          },
+          "neCategory": {
+            "type": "string"
+          },
+          "hostname": {
+            "type": "string"
+          },
+          "fqdn": {
+            "type": "string"
+          },
+          "uuid": {
+            "type": "string"
+          },
+          "serialNumber": {
+            "type": "string"
+          },
+          "secured": {
+            "type": "boolean"
+          },
+          "inServiceDate": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "l1Id": {
+            "type": "string"
+          },
+          "l1GeoCode": {
+            "type": "string"
+          },
+          "l1Long": {
+            "type": "number",
+            "format": "double"
+          },
+          "l1Lat": {
+            "type": "number",
+            "format": "double"
+          },
+          "l2Id": {
+            "type": "string"
+          },
+          "l2GeoCode": {
+            "type": "string"
+          },
+          "l2Long": {
+            "type": "number",
+            "format": "double"
+          },
+          "l2Lat": {
+            "type": "number",
+            "format": "double"
+          },
+          "l3Id": {
+            "type": "string"
+          },
+          "l3GeoCode": {
+            "type": "string"
+          },
+          "l3Long": {
+            "type": "number",
+            "format": "double"
+          },
+          "l3Lat": {
+            "type": "number",
+            "format": "double"
+          },
+          "l4Id": {
+            "type": "string"
+          },
+          "l4GeoCode": {
+            "type": "string"
+          },
+          "l4Long": {
+            "type": "number",
+            "format": "double"
+          },
+          "l4Lat": {
+            "type": "number",
+            "format": "double"
+          },
+          "neighbourNEName": {
+            "type": "string"
+          },
+          "neighbourParentNELong": {
+            "type": "number",
+            "format": "double"
+          },
+          "neighbourParentNELat": {
+            "type": "number",
+            "format": "double"
+          },
+          "parentNE": {
+            "type": "string"
+          },
+          "l1GeoName": {
+            "type": "string"
+          },
+          "l2GeoName": {
+            "type": "string"
+          },
+          "l3GeoName": {
+            "type": "string"
+          },
+          "l4GeoName": {
+            "type": "string"
+          },
+          "neighbourParentNEName": {
+            "type": "string"
+          },
+          "neighbourVendor": {
+            "type": "string"
+          },
+          "neighbourDomain": {
+            "type": "string"
+          },
+          "neighbourTechnology": {
+            "type": "string"
+          },
+          "neighbourNEId": {
+            "type": "string"
+          },
+          "parentNEID": {
+            "type": "string"
+          },
+          "relation": {
+            "type": "string"
+          },
+          "cktId": {
+            "type": "string"
+          },
+          "destCategory": {
+            "type": "string"
+          },
+          "srcCategory": {
+            "type": "string"
+          },
+          "deleted": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ElementUtilInputWrapper": {
+        "type": "object",
+        "properties": {
+          "elementName": {
+            "type": "string"
+          },
+          "kpiName": {
+            "type": "string"
+          },
+          "fromDate": {
+            "type": "string"
+          },
+          "toDate": {
+            "type": "string"
+          },
+          "aggregation": {
+            "type": "string"
+          },
+          "paramType": {
+            "type": "string"
+          },
+          "elementList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "kpiId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "domain": {
+            "type": "string"
+          },
+          "vendor": {
+            "type": "string"
+          }
+        }
+      },
+      "LinkUtilInputWrapper": {
+        "type": "object",
+        "properties": {
+          "edgeIdList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "nodeLinkList": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "dateList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "hourList": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            }
+          },
+          "dateFilterType": {
+            "type": "string"
+          },
+          "kpiName": {
+            "type": "string"
+          },
+          "aggregation": {
+            "type": "string"
+          },
+          "linkUtilMeasure": {
+            "type": "string"
+          },
+          "minuteFrequency": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "prefixKeyList": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "selectedRing": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          "kpiId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "linkMap": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "edgeMap": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          },
+          "linkList": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "domain": {
+            "type": "string"
+          },
+          "vendor": {
+            "type": "string"
+          },
+          "nodeType": {
+            "type": "string"
+          },
+          "frequency": {
+            "type": "string"
+          },
+          "startDate": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "endDate": {
+            "type": "integer",
+            "format": "int64"
+          }
+        }
+      },
+      "TopologyFilterInfoWrappper": {
+        "type": "object",
+        "properties": {
+          "element": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "geographyL1": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "writeOnly": true
+          },
+          "geographyL2": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "writeOnly": true
+          },
+          "geographyL3": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "writeOnly": true
+          },
+          "domain": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "vendor": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "linkCategory": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "siteType": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "elementTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "southWestLong": {
+            "type": "number",
+            "format": "double"
+          },
+          "southWestLat": {
+            "type": "number",
+            "format": "double"
+          },
+          "northEastLong": {
+            "type": "number",
+            "format": "double"
+          },
+          "northEastLat": {
+            "type": "number",
+            "format": "double"
+          },
+          "zoomLevel": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isExternalEdgesIncluded": {
+            "type": "boolean"
+          },
+          "ringId": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "ringType": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "connectionType": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "primaryGeoL1": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "primaryGeoL2": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "primaryGeoL3": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "utilInfo": {
+            "$ref": "#/components/schemas/LinkUtilInputWrapper"
+          }
+        }
+      },
+      "Topology": {
+        "type": "object",
+        "properties": {
+          "nodes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            },
+            "uniqueItems": true
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "AlarmConf": {
+        "type": "object",
+        "properties": {
+          "classification": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "severity": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "elementTypes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "JanusGraphQuery": {
+        "type": "object",
+        "properties": {
+          "opMode": {
+            "type": "string"
+          },
+          "queryType": {
+            "type": "string"
+          },
+          "getgQuery": {
+            "type": "string"
+          },
+          "vertexCriteria": {
+            "$ref": "#/components/schemas/JanusGraphQueryCriteria"
+          },
+          "edgeCriteria": {
+            "$ref": "#/components/schemas/JanusGraphQueryCriteria"
+          }
+        }
+      },
+      "JanusGraphQueryCriteria": {
+        "type": "object",
+        "properties": {
+          "has": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "hasNot": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "or": {
+            "$ref": "#/components/schemas/JanusGraphQuery"
+          },
+          "orderBy": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          },
+          "limit": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "edgeLables": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "edgeDirection": {
+            "type": "string"
+          }
+        }
+      },
+      "TopologyRequestWrapper": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/components/schemas/JanusGraphQuery"
+          },
+          "getNodeUtilization": {
+            "type": "boolean"
+          },
+          "getLinkUtilization": {
+            "type": "boolean"
+          },
+          "getAlarm": {
+            "type": "boolean"
+          },
+          "utilConf": {
+            "$ref": "#/components/schemas/LinkUtilInputWrapper"
+          },
+          "alarmConf": {
+            "$ref": "#/components/schemas/AlarmConf"
+          },
+          "isExternalEdgesIncluded": {
+            "type": "boolean"
+          },
+          "zoomLevel": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "includeVertexWithNoEdge": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ElementInfoRestWrapper": {
+        "type": "object",
+        "properties": {
+          "geteN": {
+            "type": "string"
+          },
+          "geteT": {
+            "type": "string"
+          },
+          "geteV": {
+            "type": "string"
+          },
+          "geteD": {
+            "type": "string"
+          },
+          "getmT": {
+            "type": "string"
+          },
+          "getsE": {
+            "type": "string"
+          },
+          "getdE": {
+            "type": "string"
+          },
+          "p": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "RANTopologyWrapper": {
+        "type": "object",
+        "properties": {
+          "nodes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "ElementConnectivityWrapper": {
+        "type": "object",
+        "properties": {
+          "sourceElementName": {
+            "type": "string"
+          },
+          "destElementName": {
+            "type": "string"
+          },
+          "sourcePort": {
+            "type": "string"
+          },
+          "destPort": {
+            "type": "string"
+          },
+          "sourceLogicalPort": {
+            "type": "string"
+          },
+          "destLogicalPort": {
+            "type": "string"
+          },
+          "sourceBundle": {
+            "type": "string"
+          },
+          "destBundel": {
+            "type": "string"
+          },
+          "sourceEType": {
+            "type": "string"
+          },
+          "destEType": {
+            "type": "string"
+          },
+          "linkcapacity": {
+            "type": "string"
+          },
+          "linkStatus": {
+            "type": "string"
+          },
+          "sourceSiteId": {
+            "type": "string"
+          },
+          "destSiteId": {
+            "type": "string"
+          },
+          "sourceEnabledOriginNW": {
+            "type": "string"
+          },
+          "destEnabledOriginNW": {
+            "type": "string"
+          },
+          "sourceVLan": {
+            "type": "string"
+          },
+          "destVLan": {
+            "type": "string"
+          },
+          "sourceIp": {
+            "type": "string"
+          },
+          "destIp": {
+            "type": "string"
+          },
+          "displayName": {
+            "type": "string"
+          },
+          "srcAType": {
+            "type": "string"
+          },
+          "destAType": {
+            "type": "string"
+          },
+          "nodePriority": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "securitySchemes": {
+      "default": {
+        "type": "oauth2",
+        "description": "Oauth2 flow",
+        "flows": {
+          "implicit": {
+            "authorizationUrl": "http://localhost/auth",
+            "scopes": {
+              "TOPOLOGY_GRAPHDB_READ_BASIS_OF_NENAME": "TOPOLOGY_GRAPHDB_READ_BASIS_OF_NENAME",
+              "TOPOLOGY_GRAPHDB_READ_GET_TOPOLOGY_DATA_COUNT": "TOPOLOGY_GRAPHDB_READ_GET_TOPOLOGY_DATA_COUNT",
+              "TOPOLOGY_TOPOLOGY_INTEGRATION_READ_GET_TOPOLOGY_DATA": "TOPOLOGY_TOPOLOGY_INTEGRATION_READ_GET_TOPOLOGY_DATA",
+              "TOPOLOGY_GRAPHDB_READ_FILTER_DATA": "TOPOLOGY_GRAPHDB_READ_FILTER_DATA",
+              "TOPOLOGY_GRAPHDB_READ_ALARM_DATA": "TOPOLOGY_GRAPHDB_READ_ALARM_DATA",
+              "TOPOLOGY_GRAPHDB_READ_MAX_TIME": "TOPOLOGY_GRAPHDB_READ_MAX_TIME",
+              "TOPOLOGY_GRAPHDB_READ_GET_TOPOLOGY_DETAIL": "TOPOLOGY_GRAPHDB_READ_GET_TOPOLOGY_DETAIL",
+              "TOPOLOGY_GRAPHDB_READ_GET_TOPOLOGY_DETAIL_COUNT": "TOPOLOGY_GRAPHDB_READ_GET_TOPOLOGY_DETAIL_COUNT",
+              "TOPOLOGY_GRAPHDB_READ_FILTER_LSP_DATA": "TOPOLOGY_GRAPHDB_READ_FILTER_LSP_DATA",
+              "TOPOLOGY_LSP_READ_TOPOLOGY_LSP": "TOPOLOGY_LSP_READ_TOPOLOGY_LSP",
+              "TOPOLOGY_LSP_READ_TOPOLOGY_LSP_COUNT": "TOPOLOGY_LSP_READ_TOPOLOGY_LSP_COUNT",
+              "TOPOLOGY_LSP_READ_TOPOLOGY_LSP_DATA": "TOPOLOGY_LSP_READ_TOPOLOGY_LSP_DATA",
+              "TOPOLOGY_LSP_READ_TOPOLOGY_LSP_STATUS": "TOPOLOGY_LSP_READ_TOPOLOGY_LSP_STATUS",
+              "TOPOLOGY_LSP_READ_LSP_FILTER_DATA": "TOPOLOGY_LSP_READ_LSP_FILTER_DATA",
+              "TOPOLOGY_LSP_READ_SEARCH_LSP_DATA": "TOPOLOGY_LSP_READ_SEARCH_LSP_DATA"
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -348,6 +348,13 @@ vsource = mgmt.getPropertyKey('source') ?: mgmt.makePropertyKey('source') .dataT
 if (!mgmt.getGraphIndex('byVertexSource')) { mgmt.buildIndex('byVertexSource', Vertex.class) .addKey(vsource) .buildCompositeIndex() }
 mgmt.commit()
 
+9.1
+mgmt = graph.openManagement()
+vgeo = mgmt.getPropertyKey('geographyL1Name') ?: mgmt.makePropertyKey('geographyL1Name') .dataType(String.class) .cardinality(org.janusgraph.core.Cardinality.SINGLE) .make()
+
+if (!mgmt.getGraphIndex('byVertexGeo')) { mgmt.buildIndex('byVertexGeo', Vertex.class) .addKey(vgeo) .buildCompositeIndex() }
+mgmt.commit() 
+
 gremlin> mgmt.printIndexes()
 ==>------------------------------------------------------------------------------------------------
 Graph Index (Vertex)           | Type        | Unique    | Backing        | Key:           Status |

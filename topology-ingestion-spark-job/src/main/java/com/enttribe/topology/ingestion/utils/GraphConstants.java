@@ -92,6 +92,24 @@ public final class GraphConstants {
     public static final String LLDP_INTERFACE_MODIFY_TIME = "lldpInterfaceModifyTime";
     public static final String OSPF_INTERFACE_MODIFY_TIME = "ospfInterfaceModifyTime";
 
+    /**
+     * JanusGraph schema stores these as {@code Long} (epoch millis). JDBC returns
+     * {@code java.sql.Timestamp} for {@code MODIFIED_TIME} columns — convert at read time.
+     */
+    public static boolean isEpochMillisProperty(String key) {
+        if (key == null) return false;
+        switch (key) {
+            case NE_MODIFY_TIME:
+            case LLDP_MODIFY_TIME:
+            case OSPF_MODIFY_TIME:
+            case LLDP_INTERFACE_MODIFY_TIME:
+            case OSPF_INTERFACE_MODIFY_TIME:
+                return true;
+            default:
+                return false;
+        }
+    }
+
     // ---- relation labels ----
     public static final String RELATION_VERTEX = "VERTEX";
     public static final String RELATION_ISIS = "ISIS";

@@ -135,6 +135,9 @@ public final class JdbcStageRunner {
                         if (GraphConstants.LAST_DISCOVERY_TIME.equalsIgnoreCase(name)) {
                             Timestamp ts = rs.getTimestamp(i);
                             value = (ts == null) ? null : ts.toLocalDateTime().toString().replace("T", " ");
+                        } else if (GraphConstants.isEpochMillisProperty(name)) {
+                            Timestamp ts = rs.getTimestamp(i);
+                            value = (ts == null) ? null : ts.getTime();
                         } else {
                             value = rs.getObject(i);
                             if (value instanceof java.math.BigDecimal) {
